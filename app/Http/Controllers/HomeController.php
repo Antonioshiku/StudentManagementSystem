@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subject;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+
+        $teacherCount=Teacher::Count();
+        $subjectCount=Subject::Count();
+        return view("dashboard",compact('teacherCount','subjectCount'));
     }
 }

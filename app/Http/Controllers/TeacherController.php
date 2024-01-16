@@ -5,12 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Teacher;
 use Faker\Guesser\Name;
 use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+use App\Models\Subject;
 
 class TeacherController extends Controller
 {
+
+
+
     public function index()
     {
-             return view('dashboard');
+        $teacher=Teacher::all();
+        $teacherCount=Teacher::Count();
+        $subjectCount=Subject::Count();
+        return view('dashboard',compact('teacher','teacherCount','subjectCount'));
     }
     public function create()
     {
@@ -29,15 +37,14 @@ class TeacherController extends Controller
             'Photo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        dd($request->all());
 
-        $image = $request->file('img');
+        $image = $request->file('Photo');
     $imageName = time().'.'.$image->extension();
     $image->move(public_path('img'), $imageName);
 
 
         Teacher::create($request->all());
 
-        return view('dashboard');
+        return $this->index();
     }
 }

@@ -33,23 +33,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td class="px-6 py-4">
-                        Silver
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
+                @foreach ($subject as $subjects)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $subjects->SubName }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $subjects->SubCode }}
+
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="text-center ms-3 rounded-full w-auto h-5 bg-gray-300">
+                                {{ $subjects->Teacher->Name }}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $subjects->SubDescription }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <button class="w-auto h-auto bg-green-400 rounded-sm text-center">
+                                <i class="bi bi-pencil-square p-1  text-white text-xs "></i>
+                            </button>
+                            <button class="w-auto h-auto bg-red-400 rounded-sm text-center">
+
+                                <i class="bi bi-trash p-1  text-white text-xs "></i>
+                            </button>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

@@ -21,4 +21,10 @@ class Teacher extends Model
         'PermentAddress',
         'Photo'
     ];
+
+
+    public function Subject()
+    {
+         return $this->hasMany(Subject::class);
+    }
 }

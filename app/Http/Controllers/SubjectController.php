@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subject;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -11,7 +13,11 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return view("dashboard");
+        $teacher=Teacher::all();
+        $subject=Subject::all();
+        $teacherCount=Teacher::Count();
+        $subjectCount=Subject::Count();
+        return view("dashboard",compact('teacher','teacherCount','subjectCount','subject'));
     }
 
     /**
@@ -19,7 +25,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view("dashboard");
+        $teacher=Teacher::all();
+      return view('dashboard',compact('teacher'));
     }
 
     /**
@@ -27,7 +34,35 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'SubName' => 'required',
+            'SubCode' => 'required|max:4',
+            'SubDescription' => 'required',
+        ]);
+
+        // $teacher = Teacher::all();
+
+        // foreach($teacher as $teachers)
+        // {
+        //      if($teachers->id == $request->AssignTeacher)
+        //      {
+        //         Teacher::create([
+
+        //              'SubCode' => $request->SubCode
+
+        //         ]);
+
+        //      }
+        // }
+
+        Subject::create([
+                  'SubName' => $request->SubName,
+                  'SubCode' => $request->SubCode,
+                  'SubDescription' => $request->SubDescription,
+                  'teacher_id' => $request->teacher_id,
+         ]);
+
+        return $this->index();
     }
 
     /**

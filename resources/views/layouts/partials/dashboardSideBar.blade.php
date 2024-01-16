@@ -17,14 +17,14 @@
         <div class="w-80 h-20 bg-gray-300 col-span-2 row-span-1 flex justify-evenly items-center">
             <i class="bi bi-person-check-fill text-2xl"></i>
             <div class="flex text-xl">
-                <p>0</p>
+                <p>{{ $teacherCount }}</p>
                 <h1 class="ps-1">Teachers</h1>
             </div>
         </div>
         <div class="w-80 h-20 bg-gray-300 col-span-2 flex justify-evenly items-center row-span-2">
             <i class="bi bi-journal-text text-2xl"></i>
             <div class="flex text-xl">
-                <p>0</p>
+                <p>{{ $subjectCount }}</p>
                 <h1 class="ps-1">Subjects</h1>
             </div>
         </div>

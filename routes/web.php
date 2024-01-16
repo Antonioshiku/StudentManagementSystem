@@ -32,6 +32,7 @@ Route::prefix('/teacher')->middleware('auth')->group(function () {
 Route::prefix('/subject')->middleware('auth')->group(function () {
     Route::get('/' , [SubjectController::class,'index'])->name('subject-View');
     Route::get('/create',[SubjectController::class,'create'])->name('subject-create');
+    Route::post('/store',[SubjectController::class,'store'])->name('subject-store');
 });
 
 Auth::routes();

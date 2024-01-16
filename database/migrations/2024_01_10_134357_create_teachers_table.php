@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('PermentAddress');
             $table->string('Photo');
             $table->timestamps();
+
+
         });
     }
 

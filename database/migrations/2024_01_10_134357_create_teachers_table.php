@@ -21,7 +21,8 @@ return new class extends Migration
             $table->date('DOB');
             $table->string('CurrentAddress');
             $table->string('PermentAddress');
-            $table->string('Photo');
+            $table->string('PhotoName');
+            $table->string('PhotoPath');
             $table->timestamps();
 
 

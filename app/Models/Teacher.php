@@ -19,7 +19,8 @@ class Teacher extends Model
         "DOB",
         "CurrentAddress",
         'PermentAddress',
-        'Photo'
+        'PhotoName',
+        'PhotoPath'
     ];
 
 

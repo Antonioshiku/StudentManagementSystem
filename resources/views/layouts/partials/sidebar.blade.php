@@ -30,6 +30,8 @@
         </div>
     </div>
 
+
+
     @if (URL::current() === 'http://127.0.0.1:8000/teacher')
         @include('Teacher.teacherView')
     @elseif(URL::current() === 'http://127.0.0.1:8000/teacher/create')
@@ -38,6 +40,8 @@
         @include('Subject.subjectView')
     @elseif(URL::current() === 'http://127.0.0.1:8000/subject/create')
         @include('Subject.subjectCreate')
+    @elseif(URL::current() === 'http://127.0.0.1:8000/teacher/edit/')
+        @include('Teacher.TeacherUpdate')
     @else
         @include('layouts.partials.dashboardSideBar')
     @endif

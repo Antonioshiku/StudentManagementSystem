@@ -58,13 +58,21 @@
 
                         </td>
                         <td class="px-6 py-4">
-                            <button class="w-auto h-auto bg-green-400 rounded-sm text-center">
-                                <i class="bi bi-pencil-square p-1  text-white text-xs "></i>
-                            </button>
-                            <button class="w-auto h-auto bg-red-400 rounded-sm text-center">
-
-                                <i class="bi bi-trash p-1  text-white text-xs "></i>
-                            </button>
+                            <div class="flex">
+                                <button class="w-auto h-auto bg-green-400 rounded-sm text-center">
+                                    <a href="{{ url('teacher/edit/' . $teachers->id) }}">
+                                        <i class="bi bi-pencil-square p-1  text-white text-xs "></i>
+                                    </a>
+                                </button>
+                                <form action="{{ route('teacher-delete', ['id' => $teachers->id]) }}" class="ps-2"
+                                    method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="w-auto h-auto bg-red-400 rounded-sm text-center">
+                                        <i class="bi bi-trash p-1  text-white text-xs "></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

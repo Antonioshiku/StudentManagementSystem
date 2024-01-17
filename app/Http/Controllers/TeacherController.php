@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subject;
 use App\Models\Teacher;
 use Faker\Guesser\Name;
 use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
+use PhpParser\Node\Expr\Cast\String_;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\HomeController;
-use App\Models\Subject;
 
 class TeacherController extends Controller
 {
@@ -40,11 +43,84 @@ class TeacherController extends Controller
 
         $image = $request->file('Photo');
     $imageName = time().'.'.$image->extension();
-    $image->move(public_path('img'), $imageName);
+    $image->move(public_path('img/'), $imageName);
 
 
-        Teacher::create($request->all());
+
+
+        Teacher::create([
+            'Name' => $request->Name,
+            'Email' => $request->Email,
+            'Password' => $request->Password,
+            'Phone' => $request->Phone ,
+            'DOB' => $request->DOB,
+            'Gender' => $request->Gender,
+            'CurrentAddress' => $request->CurrentAddress,
+            'PermentAddress' => $request->PermentAddress,
+            'PhotoName' => $imageName,
+            'PhotoPath' => $image
+        ]);
 
         return $this->index();
+    }
+
+    public function edit(string $id)
+    {
+         $teacher=Teacher::find($id);
+         return view('Teacher.TeacherUpdate',compact('teacher'));
+    }
+
+    public function update(Request $request,string $id)
+    {
+
+              $teacher= Teacher::findOrFail($id);
+              $newImage="";
+              $imageName=" ";
+              if ($request->hasFile('Photo')) {
+                $newImage = $request->file('Photo');
+                $imageName = time().'.'.$newImage->extension();
+                $newImage->move(public_path('images'), $imageName);
+
+                // Remove the previous image if needed
+                if ($request->Photo) {
+                    Storage::delete('public/images/' . $imageName);
+                }
+
+                // Update the user's image information
+                $imageName = $imageName;
+
+            }else
+            {
+                 $newImage=$teacher->PhotoPath;
+                 $imageName=$teacher->PhotoName;
+            }
+
+
+
+
+              $teacher->update([
+                'Name' => $request->Name,
+                'Email' => $request->Email,
+                'Password' => $request->Password,
+                'Phone' => $request->Phone ,
+                'DOB' => $request->DOB,
+                'Gender' => $request->Gender,
+                'CurrentAddress' => $request->CurrentAddress,
+                'PermentAddress' => $request->PermentAddress,
+                'PhotoName' => $imageName,
+                'PhotoPath' => $newImage
+              ]);
+
+           return  $this->index();
+    }
+
+    public function delete(string $id)
+    {
+
+        $teacher=Teacher::find($id);
+        dd($teacher->id);
+        Storage::delete('public/images/' . $teacher->PhotoName);
+        $teacher->delete();
+            return $this->index();
     }
 }

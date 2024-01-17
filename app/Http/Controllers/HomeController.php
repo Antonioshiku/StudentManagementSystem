@@ -25,9 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+      $teacher=Teacher::all();
         $teacherCount=Teacher::Count();
         $subjectCount=Subject::Count();
-        return view("dashboard",compact('teacherCount','subjectCount'));
+        return view("dashboard",compact('teacher','teacherCount','subjectCount'));
     }
 }

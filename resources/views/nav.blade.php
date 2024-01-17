@@ -10,7 +10,7 @@
                 <p class="ps-3 text-sm">School Management System</p>
             </div>
             <div class="flex w-20 justify-evenly">
-                <img src="{{ asset('img/download (2).png') }}" class="w-5 rounded-full" alt="hh">
+                <img src="{{ asset('images/1705479224.png') }}" class="w-5 rounded-full" alt="hh">
                 <p>Admin</p>
             </div>
         </div>

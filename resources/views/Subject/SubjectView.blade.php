@@ -44,7 +44,7 @@
 
                         </td>
                         <td class="px-6 py-4">
-                            <div class="text-center ms-3 rounded-full w-auto h-5 bg-gray-300">
+                            <div class="text-center ms-3 rounded-full w-a h-5 bg-gray-300">
                                 {{ $subjects->Teacher->Name }}
                             </div>
                         </td>

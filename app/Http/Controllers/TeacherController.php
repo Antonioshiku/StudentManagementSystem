@@ -10,6 +10,7 @@ use Laravel\Ui\Presets\React;
 use PhpParser\Node\Expr\Cast\String_;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Arr;
 
 class TeacherController extends Controller
 {
@@ -97,7 +98,6 @@ class TeacherController extends Controller
 
 
 
-
               $teacher->update([
                 'Name' => $request->Name,
                 'Email' => $request->Email,
@@ -118,9 +118,10 @@ class TeacherController extends Controller
     {
 
         $teacher=Teacher::find($id);
-        dd($teacher->id);
         Storage::delete('public/images/' . $teacher->PhotoName);
+       Subject::where('teacher_id', '=', $teacher->id)->update(array('teacher_id' => ' '));
         $teacher->delete();
+
             return $this->index();
     }
 }

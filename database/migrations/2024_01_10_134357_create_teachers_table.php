@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('Name');
             $table->string('Email')->uniqid();
-            $table->integer('Password')->max(10);
+            $table->integer('Password')->max(10)   ;
             $table->string('Phone');
             $table->string('Gender');
             $table->date('DOB');

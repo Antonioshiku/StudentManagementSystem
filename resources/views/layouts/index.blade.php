@@ -32,6 +32,7 @@
 <script type="text/javascript">
     $('.DeleteBu').click(function(event) {
         event.preventDefault();
+        var form = this.closest('.form');
         Swal.fire({
             title: 'Are you sure?',
             text: "The Data Will Be Deleted Permentally!",
@@ -48,7 +49,7 @@
                     'success'
                 )
                 setTimeout(() => {
-                    $("#Form").submit();
+                    $(form).submit();
                 }, 1500);
 
             }

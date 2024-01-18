@@ -18,15 +18,16 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            'Name' => 'BaNyar',
-            'Email' => 'joe@gmail.com',
+            'Name' => 'SuPyae',
+            'Email' => 'su@gmail.com',
             'Password' => '12345',
             'Phone' => '0987654334',
-            'Gender' => 'Male',
+            'Gender' => 'Female',
             'DOB' => Carbon::create('2003','16','10'),
-            'CurrentAddress' => 'Yangon',
-            'PermentAddress' => 'Dala',
-            'Photo' => 'img'
+            'CurrentAddress' => 'Hleden',
+            'PermentAddress' => 'Yangon',
+            'PhotoName' => '1705565608.png',
+            'PhotoPath' => 'C:\Users\User\AppData\Local\Temp\php4E50.tmp',
         ];
     }
 }

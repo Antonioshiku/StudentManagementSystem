@@ -64,11 +64,11 @@
                                         <i class="bi bi-pencil-square p-1  text-white text-xs "></i>
                                     </a>
                                 </button>
-                                <form action="{{ route('teacher-delete', ['id' => $teachers->id]) }}" class="ps-2"
-                                    method="post">
+                                <form class="form" action="{{ route('teacher-delete', ['id' => $teachers->id]) }}"
+                                    class="ms-4" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="w-auto h-auto bg-red-400 rounded-sm text-center">
+                                    <button class="w-auto ms-2 h-auto bg-red-400 rounded-sm text-center DeleteBu">
                                         <i class="bi bi-trash p-1  text-white text-xs "></i>
                                     </button>
                                 </form>

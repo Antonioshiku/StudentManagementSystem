@@ -12,6 +12,8 @@
     {{-- bootstrap icons  --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
     <title>Document</title>
     <style>
         /* Option 2: Import via CSS */
@@ -75,115 +77,74 @@
                 <div class="w-3/5 mx-auto">
                     <div class="container flex flex-col w-full  text-center h-auto">
                         <div class="flex justify-between w-full ms-12 mt-4 items-center ">
-                            <h1>Teacher Update</h1>
+                            <h1>Class Update</h1>
 
                             <div>
                                 <button class="w-20 h-8 bg-green-200 rounded-lg">
-                                    <a href="{{ route('teacher-View') }}">Back
+                                    <a href="{{ route('class-view') }}">Back
                                     </a>
                                 </button>
                             </div>
                         </div>
-                        <div class="w-full h-auto flex justify-center">
-                            <img class="w-24" src="{{ asset('img/' . $teacher->PhotoName) }}" alt="hh">
-
-                        </div>
-                        <form method="post" action="{{ route('teacher-update', ['id' => $teacher->id]) }}"
+                        <form method="POST" action="{{ route('class-update', ['id' => $classRoom->id]) }}"
                             enctype="multipart/form-data">
-                            @method('PUT')
                             @csrf
+                            @method('PUT')
                             <div class="text-sm mt-4 mb-4">
                                 <label for="Name" class="me-2">Name :</label>
-                                <input name="Name" value="{{ $teacher->Name }}"
+                                <input name="class_name" value="{{ $classRoom->class_name }}"
                                     class="h-8 bg-blue-100 border-none rounded-sm" type="text">
                             </div>
-                            @error('Name')
+                            @error('class_name')
                                 <div class="text-sm text-center text-red-500">
                                     {{ $message }}
                                 </div>
                             @enderror
                             <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Email :</label>
-                                <input name="Email" value="{{ $teacher->Email }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="email">
+                                <label for="Name" class="me-2">Student :</label>
+                                <input name="student" value="{{ $classRoom->student }}"
+                                    class="h-8 bg-blue-100 border-none rounded-sm" type="number">
                             </div>
-                            @error('Email')
+                            @error('student')
+                                <div class="text-sm text-center text-red-500">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="text-sm mt-4 w-20 flex mb-4 ms-[160px]">
+                                <label for="Assigned Teacher" class="me-2 ">subject </label>
+                                <select name="subject_id[]" multiple
+                                    class="h-8   text-black bg-blue-100 border-none rounded-sm" id="subject">
+                                    <option value="">Select Subject</option>
+                                    @foreach ($subject as $subjects)
+                                        <option class="text-black" value="{{ $subjects->id }}">
+                                            {{ $subjects->SubName }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('subject_id')
                                 <div class="text-sm text-center text-red-500">
                                     {{ $message }}
                                 </div>
                             @enderror
                             <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Password :</label>
-                                <input name="Password" value="{{ $teacher->Password }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="password">
+                                <label for="Assigned Teacher" class="me-2">Assign Teacher</label>
+                                <select name="teacher_id"
+                                    class="h-8 ps-2 text-black bg-blue-100 border-none rounded-sm">
+                                    <option value="">-- Select Teacher --</option>
+                                    @foreach ($teacher as $teachers)
+                                        <option class="text-black" value="{{ $teachers->id }}">{{ $teachers->Name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                            @error('Password')
+                            @error('teacher_id')
                                 <div class="text-sm text-center text-red-500">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Phone :</label>
-                                <input name="Phone" value="{{ $teacher->Phone }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="text">
-                            </div>
-                            @error('Phone')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <div class="text-sm mt-4 w-[300px] mx-auto  mb-4 flex justify-evenly">
-                                <label for="gender"
-                                    class= "col-md-4 col-form-label text-md-right">{{ __('Gender :') }}</label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="Gender" value="male">
-                                    <label class="form-check-label" for="male">Male</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="Gender" value="female">
-                                    <label class="form-check-label" for="female">Female</label>
-                                </div>
-                            </div>
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Date of Birth :</label>
-                                <input name="DOB" value="{{ $teacher->DOB }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="date">
-                            </div>
-                            @error('DOB')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">current Address :</label>
-                                <input name="CurrentAddress" value="{{ $teacher->CurrentAddress }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="text">
-                            </div>
-                            @error('CurrentAddress')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Permanent Address :</label>
-                                <input name="PermentAddress" value="{{ $teacher->PermentAddress }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="text">
-                            </div>
-                            @error('PermentAddress')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Picture :</label>
-                                <input name="Photo" class="h-8 bg-blue-100 border-none rounded-sm" type="file">
-                                <input type="hidden" name="Photo" value="{{ $teacher->PhotoPath }}">
-                            </div>
-                            @error('Photo')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+
+
                             <div>
                                 <button class="w-20 h-8 bg-blue-200 mb-4 rounded-lg">Submit</button>
                             </div>
@@ -198,5 +159,12 @@
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/js/multi-select-tag.js"></script>
+<script type="text/javascript">
+    new MultiSelectTag('subject') // id
+</script>
 
 </html>

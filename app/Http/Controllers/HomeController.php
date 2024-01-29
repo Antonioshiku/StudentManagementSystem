@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\classroom;
 use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class HomeController extends Controller
       $teacher=Teacher::all();
         $teacherCount=Teacher::Count();
         $subjectCount=Subject::Count();
-        return view("dashboard",compact('teacher','teacherCount','subjectCount'));
+        $classCount=classroom::Count();
+        return view("dashboard",compact('teacher','teacherCount','subjectCount','classCount'));
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -36,7 +37,19 @@ Route::prefix('/subject')->middleware('auth')->group(function () {
     Route::get('/' , [SubjectController::class,'index'])->name('subject-View');
     Route::get('/create',[SubjectController::class,'create'])->name('subject-create');
     Route::post('/store',[SubjectController::class,'store'])->name('subject-store');
+    Route::get('/edit/{id}',[SubjectController::class,'edit'])->name('subject-edit');
+    Route::put('/update/{id}',[SubjectController::class,'update'])->name('subject-update');
+    Route::delete('/delete/{id}',[SubjectController::class,'destroy'])->name('subject-destroy');
 
+});
+
+Route::prefix('/classroom')->middleware('auth')->group(function ()
+{
+        Route::get('/' , [ClassController::class,'index'])->name('class-view');
+        Route::get('/create',[ClassController::class,'create'])->name('class-create');
+        Route::post('/store',[ClassController::class,'store'])->name('class-store');
+        Route::get('/edit/{id}',[ClassController::class,'edit'])->name('class-edit');
+        Route::put('/update/{id}',[ClassController::class,'update'])->name('class-update');
 });
 
 Auth::routes();

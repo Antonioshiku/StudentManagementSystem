@@ -31,7 +31,7 @@
         <div class="w-80 h-20 bg-gray-300 col-span-2 flex justify-evenly items-center row-span-2">
             <i class="bi bi-menu-button-wide-fill text-2xl"></i>
             <div class="flex text-xl">
-                <p>0</p>
+                <p>{{ $classCount }}</p>
                 <h1 class="ps-1">Classes</h1>
             </div>
 

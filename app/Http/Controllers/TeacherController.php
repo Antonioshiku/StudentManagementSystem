@@ -80,11 +80,11 @@ class TeacherController extends Controller
               if ($request->hasFile('Photo')) {
                 $newImage = $request->file('Photo');
                 $imageName = time().'.'.$newImage->extension();
-                $newImage->move(public_path('images'), $imageName);
+                $newImage->move(public_path('img'), $imageName);
 
                 // Remove the previous image if needed
                 if ($request->Photo) {
-                    Storage::delete('public/images/' . $imageName);
+                    Storage::delete('public/img/' . $imageName);
                 }
 
                 // Update the user's image information

@@ -1,13 +1,13 @@
 <div class="flex flex-col w-full h-[100vh]">
     <div class="container flex w-11/12 items-center justify-between ">
         <div>
-            <h1 class="ps-12 pt-3">Teacher</h1>
+            <h1 class="ps-12 pt-3 font-bold">Class</h1>
         </div>
         <div class="mt-2">
             <button class="text-sm p-2 rounded-lg bg-green-500">
-                <a href="{{ route('teacher-create') }}">
+                <a href="{{ route('class-create') }}">
                     <i class="bi bi-plus"></i>
-                    Add New Teacher </button>
+                    Add New Class </button>
             </a>
         </div>
     </div>
@@ -19,13 +19,13 @@
                         Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Email
+                        Student
+                    </th>
+                    <th scope="col" class="px-9 py-3">
+                        Subject
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Subject Code
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Phone
+                        Teacher
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -33,45 +33,44 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($teacher as $teachers)
+
+                @foreach ($classRoom as $classRooms)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $teachers->Name }}
-                        </th>
+
                         <td class="px-6 py-4">
-                            {{ $teachers->Email }}
+                            {{ $classRooms->class_name }}
+
+                        </td>
+
+                        <td class="px-9 py-4">
+
+                            {{ $classRooms->student }}
 
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex">
-                                @forelse($teachers->Subject as $subjects)
-                                    <div class="p-1 w-8 rounded-full flex ms-3 h-auto bg-gray-200">
-                                        {{ $subjects?->SubCode ?? ' ' }}
+                                @foreach ($classRooms->subject_id as $subject)
+                                    <div
+                                        class="p-1 w-8 rounded-full flex justify-center items-center ms-2 h-auto bg-gray-200">
+                                        {{ $subject }}
                                     </div>
-                                @empty
-                                @endforelse
+                                @endforeach
                             </div>
                         </td>
-                        <td class="px-6 py-4">
-                            {{ $teachers->Phone }}
+                        <td class="px-8 py-4">
+                            {{ $classRooms->Teacher->Name }}
 
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex">
                                 <button class="w-auto h-auto bg-green-400 rounded-sm text-center">
-                                    <a href="{{ url('teacher/edit/' . $teachers->id) }}">
+                                    <a href="{{ route('class-edit', ['id' => $classRooms->id]) }}">
                                         <i class="bi bi-pencil-square p-1  text-white text-xs "></i>
                                     </a>
                                 </button>
-                                <form class="form" action="{{ route('teacher-delete', ['id' => $teachers->id]) }}"
-                                    class="ms-4" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="w-auto ms-2 h-auto bg-red-400 rounded-sm text-center DeleteBu">
-                                        <i class="bi bi-trash p-1  text-white text-xs "></i>
-                                    </button>
-                                </form>
+                                <button class="w-auto ms-2 h-auto bg-red-400 rounded-sm text-center DeleteBu">
+                                    <i class="bi bi-trash p-1  text-white text-xs "></i>
+                                </button>
                             </div>
                         </td>
                     </tr>

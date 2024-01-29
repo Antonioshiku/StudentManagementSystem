@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\classroom;
 use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class SubjectController extends Controller
         $subject=Subject::all();
         $teacherCount=Teacher::Count();
         $subjectCount=Subject::Count();
-        return view("dashboard",compact('teacher','teacherCount','subjectCount','subject'));
+        $classCount=classroom::Count();
+        return view("dashboard",compact('teacher','teacherCount','subjectCount','subject','classCount'));
     }
 
     /**
@@ -78,7 +80,9 @@ class SubjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $teacher=Teacher::all();
+        $subject=Subject::find($id);
+        return view('Subject.SubjectUpdate' ,compact('teacher','subject'));
     }
 
     /**
@@ -86,7 +90,16 @@ class SubjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+           $subject=Subject::findorFail($id);
+
+           $subject->update([
+            'SubName' => $request->SubName,
+            'SubCode' => $request->SubCode,
+            'SubDescription' => $request->SubDescription,
+            'teacher_id' => $request->teacher_id ?? ' ',
+          ]);
+
+       return  $this->index();
     }
 
     /**
@@ -94,6 +107,10 @@ class SubjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $subject=Subject::find($id);
+
+          $subject->delete();
+
+          return $this->index();
     }
 }

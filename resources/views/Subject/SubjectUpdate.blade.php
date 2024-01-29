@@ -75,115 +75,56 @@
                 <div class="w-3/5 mx-auto">
                     <div class="container flex flex-col w-full  text-center h-auto">
                         <div class="flex justify-between w-full ms-12 mt-4 items-center ">
-                            <h1>Teacher Update</h1>
+                            <h1>Subject Update</h1>
 
                             <div>
                                 <button class="w-20 h-8 bg-green-200 rounded-lg">
-                                    <a href="{{ route('teacher-View') }}">Back
+                                    <a href="{{ route('subject-View') }}">Back
                                     </a>
                                 </button>
                             </div>
                         </div>
-                        <div class="w-full h-auto flex justify-center">
-                            <img class="w-24" src="{{ asset('img/' . $teacher->PhotoName) }}" alt="hh">
 
-                        </div>
-                        <form method="post" action="{{ route('teacher-update', ['id' => $teacher->id]) }}"
-                            enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('subject-update', ['id' => $subject->id]) }}">
                             @method('PUT')
                             @csrf
                             <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Name :</label>
-                                <input name="Name" value="{{ $teacher->Name }}"
+                                <label for="Name" class="me-2">Subject Name :</label>
+                                <input name="SubName" value="{{ $subject->SubName }}"
                                     class="h-8 bg-blue-100 border-none rounded-sm" type="text">
                             </div>
-                            @error('Name')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
                             <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Email :</label>
-                                <input name="Email" value="{{ $teacher->Email }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="email">
-                            </div>
-                            @error('Email')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Password :</label>
-                                <input name="Password" value="{{ $teacher->Password }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="password">
-                            </div>
-                            @error('Password')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Phone :</label>
-                                <input name="Phone" value="{{ $teacher->Phone }}"
+                                <label for="Name" class="me-2">Subject Code :</label>
+                                <input name="SubCode" value="{{ $subject->SubCode }}"
                                     class="h-8 bg-blue-100 border-none rounded-sm" type="text">
                             </div>
-                            @error('Phone')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <div class="text-sm mt-4 w-[300px] mx-auto  mb-4 flex justify-evenly">
-                                <label for="gender"
-                                    class= "col-md-4 col-form-label text-md-right">{{ __('Gender :') }}</label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="Gender" value="male">
-                                    <label class="form-check-label" for="male">Male</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="Gender" value="female">
-                                    <label class="form-check-label" for="female">Female</label>
-                                </div>
-                            </div>
                             <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Date of Birth :</label>
-                                <input name="DOB" value="{{ $teacher->DOB }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="date">
-                            </div>
-                            @error('DOB')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">current Address :</label>
-                                <input name="CurrentAddress" value="{{ $teacher->CurrentAddress }}"
+                                <label for="Name" class="me-2">Subject Description :</label>
+                                <input name="SubDescription" value="{{ $subject->SubDescription }}"
                                     class="h-8 bg-blue-100 border-none rounded-sm" type="text">
                             </div>
-                            @error('CurrentAddress')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
+                            <div class="text-sm mt-4 flex w-6/12 mx-auto  mb-4">
+                                <label for="Name" class="me-2">Assign Teacher :</label>
+                                <div>
+                                    <p class="text-sm ms-10 font-bold">
+                                        {{ $subject->Teacher?->Name ?? '-' }}
+                                    </p>
                                 </div>
-                            @enderror
-                            <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Permanent Address :</label>
-                                <input name="PermentAddress" value="{{ $teacher->PermentAddress }}"
-                                    class="h-8 bg-blue-100 border-none rounded-sm" type="text">
                             </div>
-                            @error('PermentAddress')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
                             <div class="text-sm mt-4 mb-4">
-                                <label for="Name" class="me-2">Picture :</label>
-                                <input name="Photo" class="h-8 bg-blue-100 border-none rounded-sm" type="file">
-                                <input type="hidden" name="Photo" value="{{ $teacher->PhotoPath }}">
+                                <label for="Assigned Teacher" class="me-2">Assign Teacher</label>
+                                <select name="teacher_id"
+                                    class="h-8 ps-2 text-black bg-blue-100 border-none rounded-sm">
+                                    <option value="">-- Select Teacher --</option>
+                                    @foreach ($teacher as $teachers)
+                                        <option class="text-black"
+                                            {{ $teachers->id == $subject->teacher_id ? $teachers->Name : ' ' }}
+                                            value="{{ $teachers->id }}">
+                                            {{ $teachers->Name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                            @error('Photo')
-                                <div class="text-sm text-center text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
                             <div>
                                 <button class="w-20 h-8 bg-blue-200 mb-4 rounded-lg">Submit</button>
                             </div>

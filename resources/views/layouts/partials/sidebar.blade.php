@@ -15,7 +15,7 @@
             </div>
             <div>
                 <i class="bi bi-menu-button-wide-fill"></i>
-                <a class="ps-2 pt-1">Classes</a>
+                <a href="{{ route('class-view') }}" class="ps-2 pt-1">Classes</a>
             </div>
             <div class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -42,6 +42,10 @@
         @include('Subject.subjectCreate')
     @elseif(URL::current() === 'http://127.0.0.1:8000/teacher/edit/')
         @include('Teacher.TeacherUpdate')
+    @elseif(URL::current() === 'http://127.0.0.1:8000/classroom')
+        @include('class.classView')
+    @elseif(URL::current() === 'http://127.0.0.1:8000/classroom/create')
+        @include('class.classCreate ')
     @else
         @include('layouts.partials.dashboardSideBar')
     @endif

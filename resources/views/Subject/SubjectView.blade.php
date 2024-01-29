@@ -54,11 +54,17 @@
                         </td>
                         <td class="px-6 py-4">
                             <button class="w-auto h-auto bg-green-400 rounded-sm text-center">
-                                <i class="bi bi-pencil-square p-1  text-white text-xs "></i>
+                                <a href="{{ route('subject-edit', ['id' => $subjects->id]) }}">
+                                    <i class="bi bi-pencil-square p-1  text-white text-xs "></i>
+                                </a>
                             </button>
                             <button class="w-auto h-auto bg-red-400 rounded-sm text-center">
-
-                                <i class="bi bi-trash p-1  text-white text-xs "></i>
+                                <form class="form" method="POST"
+                                    action="{{ route('subject-destroy', ['id' => $subjects->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <i class="bi bi-trash p-1  text-white text-xs DeleteBu"></i>
+                                </form>
                             </button>
                         </td>
                     </tr>

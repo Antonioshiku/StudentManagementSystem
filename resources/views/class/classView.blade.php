@@ -68,9 +68,14 @@
                                         <i class="bi bi-pencil-square p-1  text-white text-xs "></i>
                                     </a>
                                 </button>
-                                <button class="w-auto ms-2 h-auto bg-red-400 rounded-sm text-center DeleteBu">
-                                    <i class="bi bi-trash p-1  text-white text-xs "></i>
-                                </button>
+                                <form class="form" action="{{ route('class-destroy', ['id' => $classRooms->id]) }}"
+                                    class="ms-4" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="w-auto ms-2 h-auto bg-red-400 rounded-sm text-center DeleteBu">
+                                        <i class="bi bi-trash p-1  text-white text-xs "></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

@@ -83,7 +83,12 @@ class ClassController extends Controller
             'teacher_id' => 'required',
         ]);
 
-        dd($request);
+        $classRoom=classroom::findorFail($id);
+
+
+        $classRoom->update($request->all());
+
+
     }
 
     /**
@@ -91,6 +96,10 @@ class ClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         $classRoom=classroom::find($id);
+
+         $classRoom->delete();
+
+         return $this->index();
     }
 }

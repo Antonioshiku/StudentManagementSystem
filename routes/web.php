@@ -50,6 +50,7 @@ Route::prefix('/classroom')->middleware('auth')->group(function ()
         Route::post('/store',[ClassController::class,'store'])->name('class-store');
         Route::get('/edit/{id}',[ClassController::class,'edit'])->name('class-edit');
         Route::put('/update/{id}',[ClassController::class,'update'])->name('class-update');
+        Route::delete('/destroy/{id}',[ClassController::class,'destroy'])->name('class-destroy');
 });
 
 Auth::routes();
